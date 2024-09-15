@@ -1,3 +1,4 @@
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,6 +24,12 @@ public class LoadingManager : MonoBehaviour
         int currentLevel = PlayerPrefs.GetInt("currentLevel", 1);
         SceneManager.LoadScene(currentLevel);
     }
+
+    public void LoadScene(string sceneName)
+    {
+        SceneManager.LoadScene(2);
+    }
+
     public void Restart()
     {
         //SceneManager.LoadScene(currentLevel);

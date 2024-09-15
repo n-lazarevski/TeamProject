@@ -71,14 +71,19 @@ public class PlayerMovement : MonoBehaviour
             body.gravityScale = 7;
             body.velocity = new Vector2(horizontalInput * speed, body.velocity.y);
 
-            if (isGrounded())
-            {
-                coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
-                jumpCounter = extraJumps; //Reset jump counter to extra jump value
-            }
-            else
-                coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground
+
         }
+
+        if (isGrounded() || onWall())
+        {
+            coyoteCounter = coyoteTime; //Reset coyote counter when on the ground
+            jumpCounter = extraJumps; //Reset jump counter to extra jump value
+        }
+        else
+        {
+            coyoteCounter -= Time.deltaTime; //Start decreasing coyote counter when not on the ground 
+        }
+
     }
 
     private void Jump()
