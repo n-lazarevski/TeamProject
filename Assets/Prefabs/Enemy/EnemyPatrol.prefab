@@ -77,7 +77,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   leftEdge: {fileID: 7326869951205002536}
   rightEdge: {fileID: 7326869951645344822}
-  enemy: {fileID: 0}
+  enemy: {fileID: 9090642292535986133, guid: f7cbfefdd43eefc449d1dccecab4d863, type: 3}
   speed: 2.5
   idleDuration: 1
   anim: {fileID: 0}
