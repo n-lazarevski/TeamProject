@@ -38,4 +38,10 @@ public class PlatformController : MonoBehaviour
             collision.transform.SetParent(null);
         }
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(posA.position, posB.position);
+    }
 }
