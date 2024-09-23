@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Levels/n_level.unity
     guid: e904c60e569d4a342a74d587cba68c8b
+  - enabled: 1
+    path: Assets/Levels/Level_1_Kiko.unity
+    guid: 787e6fff3d3d54e40b9e933634728a72
   m_configObjects: {}

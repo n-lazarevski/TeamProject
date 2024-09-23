@@ -7,30 +7,35 @@ public class Spikehead : EnemyDamage
     [SerializeField] private float range;
     [SerializeField] private float checkDelay;
     [SerializeField] private LayerMask playerLayer;
+    [SerializeField] private LayerMask obstructionLayer;
+
     private Vector3[] directions = new Vector3[4];
     private Vector3 destination;
     private float checkTimer;
     private bool attacking;
 
-    [Header("SFX")]
-    [SerializeField] private AudioClip impactSound;
-
     private void OnEnable()
     {
         Stop();
     }
+
     private void Update()
     {
         //Move spikehead to destination only if attacking
-        if (attacking)
+        if (attacking) 
+        {
             transform.Translate(destination * Time.deltaTime * speed);
+        }
         else
         {
             checkTimer += Time.deltaTime;
             if (checkTimer > checkDelay)
+            { 
                 CheckForPlayer();
+            }
         }
     }
+
     private void CheckForPlayer()
     {
         CalculateDirections();
@@ -43,18 +48,24 @@ public class Spikehead : EnemyDamage
 
             if (hit.collider != null && !attacking)
             {
-                attacking = true;
-                destination = directions[i];
-                checkTimer = 0;
+                RaycastHit2D hitObstruction = Physics2D.Raycast(transform.position, directions[i], hit.distance, obstructionLayer);
+
+                if (hitObstruction == null || hitObstruction.distance == 0)
+                { 
+                    attacking = true;
+                    destination = directions[i];
+                    checkTimer = 0;
+                }
             }
         }
     }
+
     private void CalculateDirections()
     {
-        directions[0] = transform.right * range; //Right direction
+        directions[0] = transform.right * range;  //Right direction
         directions[1] = -transform.right * range; //Left direction
-        directions[2] = transform.up * range; //Up direction
-        directions[3] = -transform.up * range; //Down direction
+        directions[2] = transform.up * range;     //Up direction
+        directions[3] = -transform.up * range;    //Down direction
     }
     private void Stop()
     {
@@ -64,7 +75,6 @@ public class Spikehead : EnemyDamage
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        SoundManager.instance.PlaySound(impactSound);
         base.OnTriggerEnter2D(collision);
         Stop(); //Stop spikehead once he hits something
     }
