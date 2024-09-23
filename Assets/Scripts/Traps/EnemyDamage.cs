@@ -9,13 +9,4 @@ public class EnemyDamage : MonoBehaviour
         if (collision.tag == "Player")
             collision.GetComponent<Health>()?.TakeDamage(damage);
     }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            collision.rigidbody.GetComponent<Health>().TakeDamage(damage);
-        }
-    }
-
 }
